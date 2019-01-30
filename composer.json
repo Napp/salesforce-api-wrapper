@@ -18,7 +18,10 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^7.0",
-    "mockery/mockery": "^1.2"
+    "mockery/mockery": "^1.2",
+    "phpro/grumphp": "^0.14.3",
+    "wearejust/grumphp-extra-tasks": "^2.2",
+    "friendsofphp/php-cs-fixer": "^2.14"
   },
   "autoload": {
     "psr-4": {

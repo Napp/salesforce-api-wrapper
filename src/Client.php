@@ -2,10 +2,9 @@
 
 namespace Napp\Salesforce;
 
-use function Couchbase\defaultDecoder;
-use Napp\Salesforce\Exceptions\RequestException;
 use GuzzleHttp\Exception\GuzzleException;
 use Napp\Salesforce\Exceptions\AuthenticationException;
+use Napp\Salesforce\Exceptions\RequestException;
 
 class Client
 {
@@ -129,7 +128,7 @@ class Client
 
         return $this->makeRequest(
             'get',
-            $this->generateUrl('sobjects/'. $objectType . '/' . $id . $fieldsQuery),
+            $this->generateUrl('sobjects/' . $objectType . '/' . $id . $fieldsQuery),
             [
                 'headers' => [
                     'Authorization' => $this->getAuthHeader()
@@ -162,7 +161,7 @@ class Client
 
         $nextRecordsUrl = $data['nextRecordsUrl'] ?? '';
 
-        if (! $done) {
+        if (!$done) {
             $moreResults = $this->search(null, substr($nextRecordsUrl, 1));
 
             if ([] !== $moreResults) {
@@ -187,7 +186,7 @@ class Client
      */
     public function updateRecord(string $type, string $objectId, array $data): bool
     {
-        $url = $this->generateUrl('sobjects/'. $type . '/' . $objectId);
+        $url = $this->generateUrl('sobjects/' . $type . '/' . $objectId);
 
         $this->makeRequest('patch', $url, [
             'headers' => [
@@ -211,7 +210,7 @@ class Client
      */
     public function createRecord(string $type, array $data): string
     {
-        $url = $this->generateUrl('sobjects/'. $type);
+        $url = $this->generateUrl('sobjects/' . $type);
 
         $response = $this->makeRequest(
             'post',
@@ -239,7 +238,7 @@ class Client
      */
     public function deleteRecord(string $type, string $objectId): bool
     {
-        $url = $this->generateUrl('sobjects/'. $type . '/' . $objectId);
+        $url = $this->generateUrl('sobjects/' . $type . '/' . $objectId);
 
         $this->makeRequest('delete', $url, ['headers' => ['Authorization' => $this->getAuthHeader()]]);
 
@@ -403,6 +402,6 @@ class Client
      */
     private function generateUrl(string $append): string
     {
-        return $this->baseUrl . '/services/data/'.$this->clientConfig->getVersion().'/'.$append;
+        return $this->baseUrl . '/services/data/' . $this->clientConfig->getVersion() . '/' . $append;
     }
 }

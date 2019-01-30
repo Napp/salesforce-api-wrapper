@@ -28,7 +28,7 @@ class RequestException extends \Exception
         if (isset($data['error'], $data['error_description'])) {
             $self->errorCode = $data['error'];
             $self->message = $data['error_description'];
-        } else if (isset($data[0]['message'], $data[0]['errorCode'])) {
+        } elseif (isset($data[0]['message'], $data[0]['errorCode'])) {
             $self->errorCode = $data[0]['errorCode'];
             $self->message = $data[0]['message'];
         } else {
@@ -43,6 +43,7 @@ class RequestException extends \Exception
     {
         $self = new self($message, $previous, $code);
         $self->errorCode = 500;
+
         return $self;
     }
 
