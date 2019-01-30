@@ -1,0 +1,24 @@
+parameters:
+    bin_dir: "./vendor/bin"
+    git_dir: "."
+    stop_on_failure: true
+    tasks:
+        php_cs_auto_fixerv2:
+            config: .php_cs
+            allow_risky: true
+        git_blacklist:
+            keywords:
+                - "var_dump("
+                - "die("
+                - "die;"
+                - "dd("
+            triggered_by: [php,js,html]
+        composer:
+            file: ./composer.json
+            no_check_publish: true
+            no_check_lock: true
+        yamllint:
+        jsonlint:
+            ignore_patterns: []
+    extensions:
+        - Wearejust\GrumPHPExtra\Extension\Loader
