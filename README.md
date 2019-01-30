@@ -1,7 +1,7 @@
-[![Current Version](https://img.shields.io/packagist/v/crunch-accounting/salesforce-api.svg?style=flat-square)](https://packagist.org/packages/crunch-accounting/salesforce-api)
-[![License](https://img.shields.io/packagist/l/crunch-accounting/salesforce-api.svg?style=flat-square)](https://packagist.org/packages/crunch-accounting/salesforce-api)
-[![Scrutinizer](https://img.shields.io/scrutinizer/g/crunch-accounting/salesforce-api-php-wrapper.svg?style=flat-square)](https://scrutinizer-ci.com/g/crunch-accounting/salesforce-api-php-wrapper/)
-[![Travis](https://img.shields.io/travis/crunch-accounting/salesforce-api-php-wrapper.svg?style=flat-square)](https://travis-ci.org/crunch-accounting/salesforce-api-php-wrapper)
+[![Current Version](https://img.shields.io/packagist/v/napp/salesforce-api.svg?style=flat-square)](https://packagist.org/packages/napp/salesforce-api)
+[![License](https://img.shields.io/packagist/l/napp/salesforce-api.svg?style=flat-square)](https://packagist.org/packages/napp/salesforce-api)
+[![Scrutinizer](https://img.shields.io/scrutinizer/g/napp/salesforce-api-wrapper.svg?style=flat-square)](https://scrutinizer-ci.com/g/napp/salesforce-api-wrapper/)
+[![Travis](https://img.shields.io/travis/napp/salesforce-api-wrapper.svg?style=flat-square)](https://travis-ci.org/napp/salesforce-api-wrapper)
 
 # Salesforce PHP Library
 
@@ -24,7 +24,7 @@ ___With User interaction:___
 You need to fetch an access token for a user, all followup requests will be performed against this user.
 
 ```php
-$sfClient = \Crunch\Salesforce\Client::create('https://test.salesforce.com/', 'clientid', 'clientsecret', 'v37.0');
+$sfClient = \Napp\Salesforce\Client::create('https://test.salesforce.com/', 'clientid', 'clientsecret', 'v37.0');
 
 if ( ! isset($_GET['code'])) {
 
@@ -45,7 +45,7 @@ To use this method you also need the security token to be appended to the passwo
 Keep in mind this method is to be used as a replacement for the old API Key workflow.
 
 ```php
-$sfClient = \Crunch\Salesforce\Client::create('https://test.salesforce.com/', 'clientid', 'clientsecret');
+$sfClient = \Napp\Salesforce\Client::create('https://test.salesforce.com/', 'clientid', 'clientsecret');
 $sfClient->login('username', 'passwordAndSecurityTokenAppended');
 
 ```
@@ -55,8 +55,8 @@ __Performing an action:__
 Once you have an access token you can perform requests against the API.
 
 ```php
-$sfClient = \Crunch\Salesforce\Client::create('https://test.salesforce.com/', 'clientid', 'clientsecret');
-$tokenGenerator = new \Crunch\Salesforce\AccessTokenGenerator();
+$sfClient = \Napp\Salesforce\Client::create('https://test.salesforce.com/', 'clientid', 'clientsecret');
+$tokenGenerator = new \Napp\Salesforce\AccessTokenGenerator();
 $accessToken = $tokenGenerator->createFromJson($_SESSION['accessToken']);
 $sfClient->setAccessToken($accessToken);
 
@@ -73,12 +73,12 @@ The client can be configured in two ways, you can call the static create method 
 details or you can use a configuration object as in the example below. This is useful when you need to resolve 
 the client out of an ioc container.
  
-The configuration data for the client is passed in through a config file which must implement `\Crunch\Salesforce\ClientConfigInterface`
+The configuration data for the client is passed in through a config file which must implement `\Napp\Salesforce\ClientConfigInterface`
 
 For example
 
 ```php
-class SalesforceConfig implements \Crunch\Salesforce\ClientConfigInterface {
+class SalesforceConfig implements \Napp\Salesforce\ClientConfigInterface {
 
     /**
      * @return string
@@ -116,14 +116,14 @@ class SalesforceConfig implements \Crunch\Salesforce\ClientConfigInterface {
 
 ```
 
-A config class is provided and can be used if needed. `\Crunch\Salesforce\ClientConfig`
+A config class is provided and can be used if needed. `\Napp\Salesforce\ClientConfig`
 
 
 The Salesforce client can then be instantiated with the config object and an instance of the Guzzle v4 client.
 
 ```php
 $sfConfig = new SalesforceConfig();
-$sfClient = new \Crunch\Salesforce\Client($sfConfig, new GuzzleHttp\Client());
+$sfClient = new \Napp\Salesforce\Client($sfConfig, new GuzzleHttp\Client());
 
 ```
 
@@ -148,7 +148,7 @@ The token returned from here is the raw data and can be passed to the access tok
 
 
 ```php
-$tokenGenerator = new \Crunch\Salesforce\AccessTokenGenerator();
+$tokenGenerator = new \Napp\Salesforce\AccessTokenGenerator();
 $accessToken = $tokenGenerator->createFromSalesforceResponse($token);
 
 ```
@@ -158,10 +158,10 @@ This access token should be stored. A method to store this on the file system is
 
 The example above uses the php session to achieve the same result.
 
-The `LocalFileStore` object needs to be instantiated with access to the token generator and a config class which implements `\Crunch\Salesforce\TokenStore\LocalFileConfigInterface`
+The `LocalFileStore` object needs to be instantiated with access to the token generator and a config class which implements `\Napp\Salesforce\TokenStore\LocalFileConfigInterface`
 
 ```php
-class SFLocalFileStoreConfig implements \Crunch\Salesforce\TokenStore\LocalFileConfigInterface {
+class SFLocalFileStoreConfig implements \Napp\Salesforce\TokenStore\LocalFileConfigInterface {
 
     /**
      * The path where the file will be stored, no trailing slash, must be writable
@@ -179,7 +179,7 @@ class SFLocalFileStoreConfig implements \Crunch\Salesforce\TokenStore\LocalFileC
 The token store can then be created and used to save the access token to the local file system as well as fetching a previously saved token.
 
 ```php
-$tokenStore = new \Crunch\Salesforce\TokenStore\LocalFile(new \Crunch\Salesforce\AccessTokenGenerator, new SFLocalFileStoreConfig);
+$tokenStore = new \Napp\Salesforce\TokenStore\LocalFile(new \Napp\Salesforce\AccessTokenGenerator, new SFLocalFileStoreConfig);
 
 //Save a token
 $tokenStore->saveAccessToken($accessToken);
@@ -210,7 +210,7 @@ Before making a request you should instantiate the client as above and then assi
 
 ```php
 $sfConfig = new SalesforceConfig();
-$sfClient = new \Crunch\Salesforce\Client($sfConfig, new \GuzzleHttp\Client());
+$sfClient = new \Napp\Salesforce\Client($sfConfig, new \GuzzleHttp\Client());
 
 $sfClient->setAccessToken($accessToken);
 
@@ -257,10 +257,10 @@ $sfClient->deleteRecord('Lead', '00WL0000008wVl1MDE');
 ## Errors
 If something goes wrong the library will throw an exception. 
 
-If its an authentication exception such as an expired token this will be as `Crunch\Salesforce\Exceptions\AuthenticationException`,
+If its an authentication exception such as an expired token this will be as `Napp\Salesforce\Exceptions\AuthenticationException`,
 you can get the exact details using the methods `getMessage` and `getErrorCode`.
 
-All other errors will be `Crunch\Salesforce\Exceptions\RequestException`, the salesforce error will be in the message
+All other errors will be `Napp\Salesforce\Exceptions\RequestException`, the salesforce error will be in the message
 
 
 ```php
@@ -269,12 +269,12 @@ try {
     $results = $sfClient->search('SELECT Name, Email FROM Lead Limit 10');
     print_r($results);
 
-} catch (\Crunch\Salesforce\Exceptions\RequestException $e) {
+} catch (\Napp\Salesforce\Exceptions\RequestException $e) {
 
     echo $e->getMessage();
     echo $e->getErrorCode();
 
-} catch (\Crunch\Salesforce\Exceptions\AuthenticationException $e) {
+} catch (\Napp\Salesforce\Exceptions\AuthenticationException $e) {
 
     echo $e->getErrorCode();
     
