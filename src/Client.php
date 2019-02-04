@@ -289,9 +289,10 @@ class Client
      * Get the url to redirect users to when setting up a salesforce access token
      *
      * @param string $redirectUrl
+     * @param string|null $state
      * @return string
      */
-    public function getLoginUrl(string $redirectUrl): string
+    public function getLoginUrl(string $redirectUrl, ?string $state = null): string
     {
         $params = [
             'client_id'     => $this->clientConfig->getClientId(),
@@ -300,7 +301,12 @@ class Client
             'grant_type'    => 'authorization_code'
         ];
 
-        return rtrim($this->clientConfig->getLoginUrl(), '/') . '/services/oauth2/authorize?' . http_build_query($params);
+        if (null !== $state) {
+            $params['state'] = $state;
+        }
+
+        return rtrim($this->clientConfig->getLoginUrl(), '/') . '/services/oauth2/authorize?' .
+            http_build_query($params, '', '&', PHP_QUERY_RFC1738);
     }
 
     /**
