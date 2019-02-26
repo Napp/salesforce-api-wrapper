@@ -6,6 +6,10 @@ use GuzzleHttp\Exception\GuzzleException;
 use Napp\Salesforce\Exceptions\AuthenticationException;
 use Napp\Salesforce\Exceptions\RequestException;
 
+/**
+ * Class Client
+ * @package Napp\Salesforce
+ */
 class Client
 {
     /**
@@ -409,5 +413,13 @@ class Client
     private function generateUrl(string $append): string
     {
         return $this->baseUrl . '/services/data/' . $this->clientConfig->getVersion() . '/' . $append;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isConfigured(): bool
+    {
+        return $this->clientConfig->isFullyConfigured();
     }
 }

@@ -2,6 +2,10 @@
 
 namespace Napp\Salesforce;
 
+/**
+ * Interface ClientConfigInterface
+ * @package Napp\Salesforce
+ */
 interface ClientConfigInterface
 {
     /**
@@ -24,4 +28,9 @@ interface ClientConfigInterface
      * @return string
      */
     public function getVersion(): string;
+
+    /**
+     * @return bool
+     */
+    public function isFullyConfigured(): bool;
 }
