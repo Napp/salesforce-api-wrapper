@@ -311,7 +311,7 @@ class Client
         }
 
         if (true === $reauthorize) {
-            $params['prompt'] = urlencode('login consent');
+            $params['prompt'] = 'login consent';
         }
 
         return rtrim($this->clientConfig->getLoginUrl(), '/') . '/services/oauth2/authorize?' .
