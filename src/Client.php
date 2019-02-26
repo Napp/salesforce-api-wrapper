@@ -294,9 +294,10 @@ class Client
      *
      * @param string $redirectUrl
      * @param string|null $state
+     * @param bool $reauthorize
      * @return string
      */
-    public function getLoginUrl(string $redirectUrl, ?string $state = null): string
+    public function getLoginUrl(string $redirectUrl, ?string $state = null, bool $reauthorize = false): string
     {
         $params = [
             'client_id'     => $this->clientConfig->getClientId(),
@@ -305,12 +306,16 @@ class Client
             'grant_type'    => 'authorization_code'
         ];
 
-        if (null !== $state) {
+        if (null !== $state || '' !== $state) {
             $params['state'] = $state;
         }
 
+        if (true === $reauthorize) {
+            $params['prompt'] = urlencode('login consent');
+        }
+
         return rtrim($this->clientConfig->getLoginUrl(), '/') . '/services/oauth2/authorize?' .
-            http_build_query($params, '', '&', PHP_QUERY_RFC1738);
+            http_build_query($params, '', '&', PHP_QUERY_RFC3986);
     }
 
     /**
