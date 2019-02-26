@@ -23,4 +23,27 @@ class ClientConfigTest extends TestCase {
         $this->assertEquals('clientSecret', $sfClientConfig->getClientSecret());
         $this->assertEquals('v37.0', $sfClientConfig->getVersion());
     }
+
+    /** @test */
+    public function client_config_knows_if_all_values_have_been_set()
+    {
+        $sfClientConfig = new \Napp\Salesforce\ClientConfig('', 'clientId', 'clientSecret', 'v37.0');
+
+        $this->assertFalse($sfClientConfig->isFullyConfigured());
+
+        $sfClientConfig = new \Napp\Salesforce\ClientConfig('hello', '', 'clientSecret', 'v37.0');
+        $this->assertFalse($sfClientConfig->isFullyConfigured());
+
+        $sfClientConfig = new \Napp\Salesforce\ClientConfig('hello', 'testing', '', 'v37.0');
+        $this->assertFalse($sfClientConfig->isFullyConfigured());
+
+        $sfClientConfig = new \Napp\Salesforce\ClientConfig('hello', 'clientId', 'clientSecret', '');
+        $this->assertFalse($sfClientConfig->isFullyConfigured());
+
+        $sfClientConfig = new \Napp\Salesforce\ClientConfig('hello', 'clientId', 'clientSecret', 'v37.0');
+        $this->assertTrue($sfClientConfig->isFullyConfigured());
+
+        $sfClientConfig = new \Napp\Salesforce\ClientConfig('', '', '', '');
+        $this->assertFalse($sfClientConfig->isFullyConfigured());
+    }
 }

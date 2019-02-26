@@ -75,4 +75,19 @@ class ClientConfig implements ClientConfigInterface
     {
         return $this->version;
     }
+
+    /**
+     * @return bool
+     */
+    public function isFullyConfigured(): bool
+    {
+        return count(array_filter([
+            $this->version,
+            $this->clientId,
+            $this->clientSecret,
+            $this->loginUrl
+        ], function ($value) {
+            return empty($value);
+        })) === 0;
+    }
 }
