@@ -41,7 +41,7 @@ class RequestException extends \Exception
 
     public static function withoutResponseError($message, Throwable $previous, int $code = 0): self
     {
-        $self = new self($message, $previous, $code);
+        $self = new self($message, $code, $previous);
         $self->errorCode = 500;
 
         return $self;
