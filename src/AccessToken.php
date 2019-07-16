@@ -83,7 +83,7 @@ class AccessToken
      */
     public function refresh(array $response): self
     {
-        $this->dateIssued = Carbon::createFromTimestamp($response['issued_at']);
+        $this->dateIssued = Carbon::createFromTimestampMs($response['issued_at']);
 
         $this->dateExpires = $this->dateIssued->copy()->addHour()->subMinutes(5);
 

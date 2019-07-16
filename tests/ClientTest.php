@@ -153,7 +153,7 @@ class ClientTest extends TestCase
     {
         $sfClient = new Client($this->getClientConfigMock(), $this->mockGuzzleClient([
             new Response(200, [], json_encode([
-                'issued_at' => time(),
+                'issued_at' => (string)time() . '000',
                 'id' => 'some-fake-id',
                 'access_token' => 'some-fake-token',
                 'instance_url' => 'some-instance',
