@@ -1,7 +1,7 @@
-[![Current Version](https://img.shields.io/packagist/v/napp/salesforce-api.svg?style=flat-square)](https://packagist.org/packages/napp/salesforce-api)
-[![License](https://img.shields.io/packagist/l/napp/salesforce-api.svg?style=flat-square)](https://packagist.org/packages/napp/salesforce-api)
-[![Scrutinizer](https://img.shields.io/scrutinizer/g/napp/salesforce-api-wrapper.svg?style=flat-square)](https://scrutinizer-ci.com/g/napp/salesforce-api-wrapper/)
-[![Travis](https://img.shields.io/travis/napp/salesforce-api-wrapper.svg?style=flat-square)](https://travis-ci.org/napp/salesforce-api-wrapper)
+[![Current Version](https://img.shields.io/packagist/v/karronoli/salesforce-api.svg?style=flat-square)](https://packagist.org/packages/karronoli/salesforce-api)
+[![License](https://img.shields.io/packagist/l/karronoli/salesforce-api.svg?style=flat-square)](https://packagist.org/packages/karronoli/salesforce-api)
+[![Scrutinizer](https://img.shields.io/scrutinizer/g/karronoli/salesforce-api-wrapper.svg?style=flat-square)](https://scrutinizer-ci.com/g/karronoli/salesforce-api-wrapper/)
+[![Travis](https://img.shields.io/travis/karronoli/salesforce-api-wrapper.svg?style=flat-square)](https://travis-ci.org/karronoli/salesforce-api-wrapper)
 
 # Salesforce PHP Library
 
@@ -15,7 +15,7 @@ Methods for setting up a connection, requesting an access token, refreshing the 
 __Installation:__
 The package should be installed through composer and locked to a major version
 ```
-composer require napp/salesforce-api:~1.0
+composer require karronoli/salesforce-api:~1.0
 ```
 
 __Getting an OAuth Token:__
@@ -24,7 +24,7 @@ ___With User interaction:___
 You need to fetch an access token for a user, all followup requests will be performed against this user.
 
 ```php
-$sfClient = \Napp\Salesforce\Client::create('https://test.salesforce.com/', 'clientid', 'clientsecret', 'v37.0');
+$sfClient = \Karronoli\Salesforce\Client::create('https://test.salesforce.com/', 'clientid', 'clientsecret', 'v37.0');
 
 if ( ! isset($_GET['code'])) {
 
@@ -45,7 +45,7 @@ To use this method you also need the security token to be appended to the passwo
 Keep in mind this method is to be used as a replacement for the old API Key workflow.
 
 ```php
-$sfClient = \Napp\Salesforce\Client::create('https://test.salesforce.com/', 'clientid', 'clientsecret');
+$sfClient = \Karronoli\Salesforce\Client::create('https://test.salesforce.com/', 'clientid', 'clientsecret');
 $sfClient->login('username', 'passwordAndSecurityTokenAppended');
 
 ```
@@ -55,8 +55,8 @@ __Performing an action:__
 Once you have an access token you can perform requests against the API.
 
 ```php
-$sfClient = \Napp\Salesforce\Client::create('https://test.salesforce.com/', 'clientid', 'clientsecret');
-$tokenGenerator = new \Napp\Salesforce\AccessTokenGenerator();
+$sfClient = \Karronoli\Salesforce\Client::create('https://test.salesforce.com/', 'clientid', 'clientsecret');
+$tokenGenerator = new \Karronoli\Salesforce\AccessTokenGenerator();
 $accessToken = $tokenGenerator->createFromJson($_SESSION['accessToken']);
 $sfClient->setAccessToken($accessToken);
 
@@ -73,12 +73,12 @@ The client can be configured in two ways, you can call the static create method 
 details or you can use a configuration object as in the example below. This is useful when you need to resolve 
 the client out of an ioc container.
  
-The configuration data for the client is passed in through a config file which must implement `\Napp\Salesforce\ClientConfigInterface`
+The configuration data for the client is passed in through a config file which must implement `\Karronoli\Salesforce\ClientConfigInterface`
 
 For example
 
 ```php
-class SalesforceConfig implements \Napp\Salesforce\ClientConfigInterface {
+class SalesforceConfig implements \Karronoli\Salesforce\ClientConfigInterface {
 
     /**
      * @return string
@@ -116,14 +116,14 @@ class SalesforceConfig implements \Napp\Salesforce\ClientConfigInterface {
 
 ```
 
-A config class is provided and can be used if needed. `\Napp\Salesforce\ClientConfig`
+A config class is provided and can be used if needed. `\Karronoli\Salesforce\ClientConfig`
 
 
 The Salesforce client can then be instantiated with the config object and an instance of the Guzzle v4 client.
 
 ```php
 $sfConfig = new SalesforceConfig();
-$sfClient = new \Napp\Salesforce\Client($sfConfig, new GuzzleHttp\Client());
+$sfClient = new \Karronoli\Salesforce\Client($sfConfig, new GuzzleHttp\Client());
 
 ```
 
@@ -148,7 +148,7 @@ The token returned from here is the raw data and can be passed to the access tok
 
 
 ```php
-$tokenGenerator = new \Napp\Salesforce\AccessTokenGenerator();
+$tokenGenerator = new \Karronoli\Salesforce\AccessTokenGenerator();
 $accessToken = $tokenGenerator->createFromSalesforceResponse($token);
 
 ```
@@ -158,10 +158,10 @@ This access token should be stored. A method to store this on the file system is
 
 The example above uses the php session to achieve the same result.
 
-The `LocalFileStore` object needs to be instantiated with access to the token generator and a config class which implements `\Napp\Salesforce\TokenStore\LocalFileConfigInterface`
+The `LocalFileStore` object needs to be instantiated with access to the token generator and a config class which implements `\Karronoli\Salesforce\TokenStore\LocalFileConfigInterface`
 
 ```php
-class SFLocalFileStoreConfig implements \Napp\Salesforce\TokenStore\LocalFileConfigInterface {
+class SFLocalFileStoreConfig implements \Karronoli\Salesforce\TokenStore\LocalFileConfigInterface {
 
     /**
      * The path where the file will be stored, no trailing slash, must be writable
@@ -179,7 +179,7 @@ class SFLocalFileStoreConfig implements \Napp\Salesforce\TokenStore\LocalFileCon
 The token store can then be created and used to save the access token to the local file system as well as fetching a previously saved token.
 
 ```php
-$tokenStore = new \Napp\Salesforce\TokenStore\LocalFile(new \Napp\Salesforce\AccessTokenGenerator, new SFLocalFileStoreConfig);
+$tokenStore = new \Karronoli\Salesforce\TokenStore\LocalFile(new \Karronoli\Salesforce\AccessTokenGenerator, new SFLocalFileStoreConfig);
 
 //Save a token
 $tokenStore->saveAccessToken($accessToken);
@@ -210,7 +210,7 @@ Before making a request you should instantiate the client as above and then assi
 
 ```php
 $sfConfig = new SalesforceConfig();
-$sfClient = new \Napp\Salesforce\Client($sfConfig, new \GuzzleHttp\Client());
+$sfClient = new \Karronoli\Salesforce\Client($sfConfig, new \GuzzleHttp\Client());
 
 $sfClient->setAccessToken($accessToken);
 
@@ -257,10 +257,10 @@ $sfClient->deleteRecord('Lead', '00WL0000008wVl1MDE');
 ## Errors
 If something goes wrong the library will throw an exception. 
 
-If its an authentication exception such as an expired token this will be as `Napp\Salesforce\Exceptions\AuthenticationException`,
+If its an authentication exception such as an expired token this will be as `Karronoli\Salesforce\Exceptions\AuthenticationException`,
 you can get the exact details using the methods `getMessage` and `getErrorCode`.
 
-All other errors will be `Napp\Salesforce\Exceptions\RequestException`, the salesforce error will be in the message
+All other errors will be `Karronoli\Salesforce\Exceptions\RequestException`, the salesforce error will be in the message
 
 
 ```php
@@ -269,12 +269,12 @@ try {
     $results = $sfClient->search('SELECT Name, Email FROM Lead Limit 10');
     print_r($results);
 
-} catch (\Napp\Salesforce\Exceptions\RequestException $e) {
+} catch (\Karronoli\Salesforce\Exceptions\RequestException $e) {
 
     echo $e->getMessage();
     echo $e->getErrorCode();
 
-} catch (\Napp\Salesforce\Exceptions\AuthenticationException $e) {
+} catch (\Karronoli\Salesforce\Exceptions\AuthenticationException $e) {
 
     echo $e->getErrorCode();
     

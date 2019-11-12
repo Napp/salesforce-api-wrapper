@@ -1,6 +1,6 @@
 <?php
 
-namespace Napp\Salesforce;
+namespace Karronoli\Salesforce;
 
 use Carbon\Carbon;
 
@@ -79,7 +79,7 @@ class AccessToken
 
     /**
      * @param array $response
-     * @return \Napp\Salesforce\AccessToken
+     * @return \Karronoli\Salesforce\AccessToken
      */
     public function refresh(array $response): self
     {
@@ -131,7 +131,7 @@ class AccessToken
 
     /**
      * @param array $array
-     * @return \Napp\Salesforce\AccessToken
+     * @return \Karronoli\Salesforce\AccessToken
      */
     public static function fromArray(array $array): self
     {

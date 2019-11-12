@@ -1,6 +1,6 @@
 <?php
 
-namespace Napp\Salesforce\Tests;
+namespace Karronoli\Salesforce\Tests;
 
 class AccessTokenGeneratorTest extends TestCase
 {
@@ -17,11 +17,11 @@ class AccessTokenGeneratorTest extends TestCase
             'accessToken' => '',
             'apiUrl' => '',
         ]);
-        $tokenGenerator = new \Napp\Salesforce\AccessTokenGenerator();
+        $tokenGenerator = new \Karronoli\Salesforce\AccessTokenGenerator();
 
         $token = $tokenGenerator->createFromJson($jsonToken);
 
-        $this->assertInstanceOf(\Napp\Salesforce\AccessToken::class, $token, 'Token generated not an instance of AccessToken');
+        $this->assertInstanceOf(\Karronoli\Salesforce\AccessToken::class, $token, 'Token generated not an instance of AccessToken');
     }
 
     /** @test */
@@ -36,10 +36,10 @@ class AccessTokenGeneratorTest extends TestCase
             'access_token' => '',
             'instance_url' => '',
         ];
-        $tokenGenerator = new \Napp\Salesforce\AccessTokenGenerator();
+        $tokenGenerator = new \Karronoli\Salesforce\AccessTokenGenerator();
         $token = $tokenGenerator->createFromSalesforceResponse($responseData);
 
-        $this->assertInstanceOf(\Napp\Salesforce\AccessToken::class, $token, 'Token generated not an instance of AccessToken');
+        $this->assertInstanceOf(\Karronoli\Salesforce\AccessToken::class, $token, 'Token generated not an instance of AccessToken');
     }
 
     /** @test */
@@ -51,10 +51,10 @@ class AccessTokenGeneratorTest extends TestCase
             'access_token' => '',
             'instance_url' => '',
         ];
-        $tokenGenerator = new \Napp\Salesforce\AccessTokenGenerator();
+        $tokenGenerator = new \Karronoli\Salesforce\AccessTokenGenerator();
         $token = $tokenGenerator->createFromSalesforceResponse($responseData);
 
-        $this->assertInstanceOf(\Napp\Salesforce\AccessToken::class, $token, 'Token generated not an instance of AccessToken');
+        $this->assertInstanceOf(\Karronoli\Salesforce\AccessToken::class, $token, 'Token generated not an instance of AccessToken');
     }
 
     /** @test */
@@ -70,7 +70,7 @@ class AccessTokenGeneratorTest extends TestCase
             'access_token' => '',
             'instance_url' => '',
         ];
-        $tokenGenerator = new \Napp\Salesforce\AccessTokenGenerator();
+        $tokenGenerator = new \Karronoli\Salesforce\AccessTokenGenerator();
         $token = $tokenGenerator->createFromSalesforceResponse($responseData);
 
         $this->assertInstanceOf(\Carbon\Carbon::class, $token->dateIssued(), 'Token issued date not a carbon instance');
@@ -93,7 +93,7 @@ class AccessTokenGeneratorTest extends TestCase
             'accessToken' => '',
             'apiUrl' => '',
         ]);
-        $tokenGenerator = new \Napp\Salesforce\AccessTokenGenerator();
+        $tokenGenerator = new \Karronoli\Salesforce\AccessTokenGenerator();
         $token = $tokenGenerator->createFromJson($jsonToken);
 
         $this->assertInstanceOf(\Carbon\Carbon::class, $token->dateIssued(), 'Token issued date not a carbon instance');

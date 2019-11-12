@@ -1,6 +1,6 @@
 <?php
 
-namespace Napp\Salesforce\Tests;
+namespace Karronoli\Salesforce\Tests;
 
 use \Mockery as m;
 
@@ -9,11 +9,11 @@ class LocalFileStoreTest extends TestCase
     /** @test */
     public function file_store_can_be_instantiated()
     {
-        $tokenGenerator = m::mock('Napp\Salesforce\AccessTokenGenerator');
-        $config = m::mock('Napp\Salesforce\TokenStore\LocalFileConfigInterface');
+        $tokenGenerator = m::mock('Karronoli\Salesforce\AccessTokenGenerator');
+        $config = m::mock('Karronoli\Salesforce\TokenStore\LocalFileConfigInterface');
         $config->shouldReceive('getFilePath')->once()->andReturn('/foo');
-        $fileStore = new \Napp\Salesforce\TokenStore\LocalFile($tokenGenerator, $config);
+        $fileStore = new \Karronoli\Salesforce\TokenStore\LocalFile($tokenGenerator, $config);
 
-        $this->assertInstanceOf(\Napp\Salesforce\TokenStore\LocalFile::class, $fileStore);
+        $this->assertInstanceOf(\Karronoli\Salesforce\TokenStore\LocalFile::class, $fileStore);
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Napp\Salesforce\TokenStore;
+namespace Karronoli\Salesforce\TokenStore;
 
-use Napp\Salesforce\AccessToken;
-use Napp\Salesforce\AccessTokenGenerator;
+use Karronoli\Salesforce\AccessToken;
+use Karronoli\Salesforce\AccessTokenGenerator;
 
 class LocalFile implements StoreInterface
 {

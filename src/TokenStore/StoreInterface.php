@@ -1,8 +1,8 @@
 <?php
 
-namespace Napp\Salesforce\TokenStore;
+namespace Karronoli\Salesforce\TokenStore;
 
-use Napp\Salesforce\AccessToken;
+use Karronoli\Salesforce\AccessToken;
 
 interface StoreInterface
 {

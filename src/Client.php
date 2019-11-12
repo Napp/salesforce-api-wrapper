@@ -1,14 +1,14 @@
 <?php
 
-namespace Napp\Salesforce;
+namespace Karronoli\Salesforce;
 
 use GuzzleHttp\Exception\GuzzleException;
-use Napp\Salesforce\Exceptions\AuthenticationException;
-use Napp\Salesforce\Exceptions\RequestException;
+use Karronoli\Salesforce\Exceptions\AuthenticationException;
+use Karronoli\Salesforce\Exceptions\RequestException;
 
 /**
  * Class Client
- * @package Napp\Salesforce
+ * @package Karronoli\Salesforce
  */
 class Client
 {
@@ -33,7 +33,7 @@ class Client
     private $guzzleClient;
 
     /**
-     * @var \Napp\Salesforce\AccessTokenGenerator
+     * @var \Karronoli\Salesforce\AccessTokenGenerator
      */
     private $tokenGenerator;
 
@@ -43,7 +43,7 @@ class Client
      *
      * @param ClientConfigInterface $clientConfig
      * @param \GuzzleHttp\ClientInterface $guzzleClient
-     * @param \Napp\Salesforce\AccessTokenGeneratorInterface $accessTokenGenerator
+     * @param \Karronoli\Salesforce\AccessTokenGeneratorInterface $accessTokenGenerator
      */
     public function __construct(
         ClientConfigInterface $clientConfig,
@@ -87,8 +87,8 @@ class Client
      * @param string $password
      *
      * @return AccessToken
-     * @throws \Napp\Salesforce\Exceptions\AuthenticationException
-     * @throws \Napp\Salesforce\Exceptions\RequestException
+     * @throws \Karronoli\Salesforce\Exceptions\AuthenticationException
+     * @throws \Karronoli\Salesforce\Exceptions\RequestException
      */
     public function login(string $user, string $password): AccessToken
     {
@@ -119,8 +119,8 @@ class Client
      * @param array $fields
      *
      * @return array
-     * @throws \Napp\Salesforce\Exceptions\AuthenticationException
-     * @throws \Napp\Salesforce\Exceptions\RequestException
+     * @throws \Karronoli\Salesforce\Exceptions\AuthenticationException
+     * @throws \Karronoli\Salesforce\Exceptions\RequestException
      */
     public function getRecord(string $objectType, string $id, array $fields = []): array
     {
@@ -185,8 +185,8 @@ class Client
      * @param array $data The data to put into the record
      * @return boolean
      *
-     * @throws \Napp\Salesforce\Exceptions\AuthenticationException
-     * @throws \Napp\Salesforce\Exceptions\RequestException
+     * @throws \Karronoli\Salesforce\Exceptions\AuthenticationException
+     * @throws \Karronoli\Salesforce\Exceptions\RequestException
      */
     public function updateRecord(string $type, string $objectId, array $data): bool
     {
@@ -209,8 +209,8 @@ class Client
      * @param string $type
      * @param array|object $data
      * @return string The id of the newly created record
-     * @throws \Napp\Salesforce\Exceptions\AuthenticationException
-     * @throws \Napp\Salesforce\Exceptions\RequestException
+     * @throws \Karronoli\Salesforce\Exceptions\AuthenticationException
+     * @throws \Karronoli\Salesforce\Exceptions\RequestException
      */
     public function createRecord(string $type, array $data): string
     {
@@ -237,8 +237,8 @@ class Client
      * @param string $type
      * @param string $objectId
      * @return bool
-     * @throws \Napp\Salesforce\Exceptions\AuthenticationException
-     * @throws \Napp\Salesforce\Exceptions\RequestException
+     * @throws \Karronoli\Salesforce\Exceptions\AuthenticationException
+     * @throws \Karronoli\Salesforce\Exceptions\RequestException
      */
     public function deleteRecord(string $type, string $objectId): bool
     {
@@ -255,8 +255,8 @@ class Client
      * @param string $code
      * @param string $redirectUrl
      * @return AccessToken
-     * @throws \Napp\Salesforce\Exceptions\AuthenticationException
-     * @throws \Napp\Salesforce\Exceptions\RequestException
+     * @throws \Karronoli\Salesforce\Exceptions\AuthenticationException
+     * @throws \Karronoli\Salesforce\Exceptions\RequestException
      */
     public function authorizeConfirm(string $code, string $redirectUrl): AccessToken
     {

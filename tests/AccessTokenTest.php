@@ -1,6 +1,6 @@
 <?php
 
-namespace Napp\Salesforce\Tests;
+namespace Karronoli\Salesforce\Tests;
 
 use Carbon\Carbon;
 
@@ -19,7 +19,7 @@ class AccessTokenTest extends TestCase {
         $issueDate  = \Carbon\Carbon::now();
         $expiryDate = \Carbon\Carbon::now()->addHour();
 
-        $token = new \Napp\Salesforce\AccessToken(
+        $token = new \Karronoli\Salesforce\AccessToken(
             'abc123',
             $issueDate,
             $expiryDate,
@@ -30,7 +30,7 @@ class AccessTokenTest extends TestCase {
             'http://example.com'
         );
 
-        $this->assertInstanceOf(\Napp\Salesforce\AccessToken::class, $token);
+        $this->assertInstanceOf(\Karronoli\Salesforce\AccessToken::class, $token);
 
         $this->assertEquals('access-token', $token->accessToken());
         $this->assertEquals('refresh-token', $token->refreshToken());
@@ -41,7 +41,7 @@ class AccessTokenTest extends TestCase {
     /** @test */
     public function token_refresh_is_correct()
     {
-        $token1 = new \Napp\Salesforce\AccessToken(
+        $token1 = new \Karronoli\Salesforce\AccessToken(
             'abc123',
             \Carbon\Carbon::now(),
             \Carbon\Carbon::now()->addHour(),
@@ -54,7 +54,7 @@ class AccessTokenTest extends TestCase {
 
         $this->assertFalse($token1->needsRefresh());
 
-        $token2 = new \Napp\Salesforce\AccessToken(
+        $token2 = new \Karronoli\Salesforce\AccessToken(
             'abc123',
             \Carbon\Carbon::now()->subHours(2),
             \Carbon\Carbon::now()->subHour(),
@@ -70,7 +70,7 @@ class AccessTokenTest extends TestCase {
     /** @test */
     public function can_convert_to_json()
     {
-        $token = new \Napp\Salesforce\AccessToken(
+        $token = new \Karronoli\Salesforce\AccessToken(
             'abc123',
             \Carbon\Carbon::now(),
             \Carbon\Carbon::now()->addHour(),
@@ -87,7 +87,7 @@ class AccessTokenTest extends TestCase {
     /** @test */
     public function updates_correctly()
     {
-        $token = new \Napp\Salesforce\AccessToken(
+        $token = new \Karronoli\Salesforce\AccessToken(
             'abc123',
             \Carbon\Carbon::now(),
             \Carbon\Carbon::now()->addHour(),

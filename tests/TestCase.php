@@ -1,6 +1,6 @@
 <?php
 
-namespace Napp\Salesforce\Tests;
+namespace Karronoli\Salesforce\Tests;
 
 use Carbon\Carbon;
 use \Mockery as m;

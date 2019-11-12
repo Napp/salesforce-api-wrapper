@@ -1,6 +1,6 @@
 <?php
 
-namespace Napp\Salesforce\TokenStore;
+namespace Karronoli\Salesforce\TokenStore;
 
 interface LocalFileConfigInterface
 {

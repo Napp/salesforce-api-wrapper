@@ -1,6 +1,6 @@
 <?php
 
-namespace Napp\Salesforce\Tests;
+namespace Karronoli\Salesforce\Tests;
 
 use Carbon\Carbon;
 use GuzzleHttp\Handler\MockHandler;
@@ -8,10 +8,10 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Response;
 use \Mockery as m;
-use Napp\Salesforce\AccessToken;
-use Napp\Salesforce\AccessTokenGenerator;
-use Napp\Salesforce\Client;
-use Napp\Salesforce\ClientConfigInterface;
+use Karronoli\Salesforce\AccessToken;
+use Karronoli\Salesforce\AccessTokenGenerator;
+use Karronoli\Salesforce\Client;
+use Karronoli\Salesforce\ClientConfigInterface;
 
 class ClientTest extends TestCase
 {
@@ -240,7 +240,7 @@ class ClientTest extends TestCase
 
     /**
      * @test
-     * @expectedException        Napp\Salesforce\Exceptions\RequestException
+     * @expectedException        Karronoli\Salesforce\Exceptions\RequestException
      * @expectedExceptionMessage expired authorization code
      */
     public function client_can_parse_auth_flow_error()

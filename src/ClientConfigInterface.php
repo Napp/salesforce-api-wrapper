@@ -1,10 +1,10 @@
 <?php
 
-namespace Napp\Salesforce;
+namespace Karronoli\Salesforce;
 
 /**
  * Interface ClientConfigInterface
- * @package Napp\Salesforce
+ * @package Karronoli\Salesforce
  */
 interface ClientConfigInterface
 {

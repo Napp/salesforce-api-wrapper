@@ -1,6 +1,6 @@
 <?php
 
-namespace Napp\Salesforce\Exceptions;
+namespace Karronoli\Salesforce\Exceptions;
 
 class AuthenticationException extends \Exception {
 
