@@ -12,6 +12,7 @@ use Napp\Salesforce\AccessToken;
 use Napp\Salesforce\AccessTokenGenerator;
 use Napp\Salesforce\Client;
 use Napp\Salesforce\ClientConfigInterface;
+use Napp\Salesforce\Exceptions\RequestException;
 
 class ClientTest extends TestCase
 {
@@ -240,11 +241,11 @@ class ClientTest extends TestCase
 
     /**
      * @test
-     * @expectedException        Napp\Salesforce\Exceptions\RequestException
-     * @expectedExceptionMessage expired authorization code
      */
     public function client_can_parse_auth_flow_error()
     {
+        $this->expectException(RequestException::class);
+        $this->expectExceptionMessage("expired authorization code");
         $sfClient = new Client($this->getClientConfigMock(), $this->mockGuzzleClient([
             new Response(400, [], '{"error_description":"expired authorization code","error":"invalid_grant"}')
         ]), new AccessTokenGenerator);

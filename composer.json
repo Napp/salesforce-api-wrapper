@@ -4,24 +4,15 @@
   "keywords": ["salesforce", "rest", "api", "oauth2"],
   "homepage": "https://github.com/napp/salesforce-api-wrapper",
   "license": "MIT",
-  "authors": [
-    {
-      "name": "Michael Lundbøl",
-      "email": "ml@napp.dk"
-    }
-  ],
   "require": {
     "ext-json": "*",
-    "php": ">=7.1.3",
-    "nesbot/carbon": "^1.12",
-    "guzzlehttp/guzzle": "^6.0"
+    "php": "^7.4|^8.0",
+    "nesbot/carbon": "^^2.0",
+    "guzzlehttp/guzzle": "^7.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^7.0",
-    "mockery/mockery": "^1.2",
-    "phpro/grumphp": "^0.14.3",
-    "wearejust/grumphp-extra-tasks": "^2.2",
-    "friendsofphp/php-cs-fixer": "^2.14"
+    "phpunit/phpunit": "^8.5|^9.5",
+    "mockery/mockery": "^1.2"
   },
   "autoload": {
     "psr-4": {

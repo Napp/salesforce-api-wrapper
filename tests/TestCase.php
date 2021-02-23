@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         if ($container = m::getContainer()) {
             $this->addToAssertionCount($container->mockery_getExpectationCount());
